@@ -1,4 +1,6 @@
 # kebot
+# name on telegram: itsKebot
+# link to bot: t.me/itsKebot
 
 Kebot, born 31.03.2024, starts as a Telegram bot able to take commands to operate with the spotify API in order to take suggestions by text message and create a playlist satisfying all members of the Apero at Maikel's place.
 
