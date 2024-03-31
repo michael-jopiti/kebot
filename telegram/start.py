@@ -52,7 +52,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     message_type: str = update.message.chat.type
     text: str = update.message.text
 
-    print(f'\t \t User ({update.message.chat.id}) in {message_type}: "{text}"')
+    print(f'\t \tUser ({update.message.chat.id}) in {message_type}: "{text}"')
     #according if it is in a group or in private chat, we need different behaviours
 
     if message_type == "group":
@@ -66,7 +66,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         response : str = handle_response(text)
 
     #for debugging purposes
-    print('Bot: ',  response)
+    print('\t \tBot: ',  response)
 
     await update.message.reply_text(response)
 
