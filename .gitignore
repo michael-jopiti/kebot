@@ -1,2 +1,5 @@
 #To be ignored
 telegram/config.txt
+telegram/.env
+spotify/config.txt
+spotify/.env

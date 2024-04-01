@@ -1,21 +1,20 @@
 # Author: Michael Jopiti
 # Date: 31.03.2024
 
-import sys
-import traceback
+import sys, os, traceback
+from dotenv import load_dotenv
 
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
 from telegram import Update
 
 ##################
-# Import TOKEN, BOT_NAME from config.txt
+# Import TOKEN, BOT_NAME from .env
 ##################
-def read_config(filename):
-    with open(filename, 'r') as file:
-        lines = file.readlines()
-        token = lines[0].strip()  # Remove leading/trailing whitespace
-        bot_name = lines[1].strip()  # Remove leading/trailing whitespace
-    return token, bot_name
+
+load_dotenv()
+
+TOKEN = os.getenv("TOKEN")
+BOT_NAME = os.getenv("BOT_NAME")
 
 ##################
 # Commands
@@ -80,9 +79,6 @@ async def error(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 if __name__ == '__main__':
     print("Starting kebot ... ")
-
-    CONFIG_FILE = './telegram/config.txt'
-    TOKEN, BOT_USERNAME = read_config(CONFIG_FILE)
 
     app = Application.builder().token(TOKEN).build()
 
