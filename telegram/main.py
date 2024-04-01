@@ -55,8 +55,8 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     #according if it is in a group or in private chat, we need different behaviours
 
     if message_type == "group":
-        if BOT_USERNAME in text:
-            new_text: str = text.replace(BOT_USERNAME, '').strip()
+        if BOT_NAME in text:
+            new_text: str = text.replace(BOT_NAME, '').strip()
             response: str = handle_response(new_text)
         else:
             return 
@@ -77,7 +77,7 @@ async def error(update: Update, context: ContextTypes.DEFAULT_TYPE):
     print(f"Update {update} caused error {context.error}:\n{''.join(error_traceback)}")
 
 
-if __name__ == '__main__':
+def main():
     print("Starting kebot ... ")
 
     app = Application.builder().token(TOKEN).build()
@@ -96,3 +96,7 @@ if __name__ == '__main__':
     ## Checks for new messages every 3 seconds
     print("\t Polling ... ")
     app.run_polling(poll_interval=3)
+
+
+if __name__ == '__main__':
+  main()

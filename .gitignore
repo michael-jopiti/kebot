@@ -1,5 +1,8 @@
 #To be ignored
-telegram/config.txt
+kebot.sh
+
 telegram/.env
+telegram/__pycache__.pyc
+
 spotify/config.txt
 spotify/.env
