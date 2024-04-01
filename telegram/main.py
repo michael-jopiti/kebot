@@ -7,6 +7,13 @@ from dotenv import load_dotenv
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
 from telegram import Update
 
+import commands
+
+import sys
+sys.path.append("/Users/michaeljopiti/kebot")
+
+from spotify import Spotify as spotify
+
 ##################
 # Import TOKEN, BOT_NAME from .env
 ##################
@@ -15,19 +22,6 @@ load_dotenv()
 
 TOKEN = os.getenv("TOKEN")
 BOT_NAME = os.getenv("BOT_NAME")
-
-##################
-# Commands
-##################
-
-async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("Hey! It's working the connection with the API!")
-
-async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("At the moment nothing cool ... I'm still under construction ;) !")
-
-async def custom_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("This is a custom command!")
 
 
 ##################
@@ -42,7 +36,7 @@ def handle_response(text: str) -> str:
     if "Hello" in text:
         return "Hello there!"
     
-    return "I don't understand what you're saying, try again please :')"
+    return "I don't understand what you're saying, try again please :') \n If you don't know what to do, type: /help"
 
 
 ##  Logic to behave according to user input and type
@@ -79,13 +73,15 @@ async def error(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 def main():
     print("Starting kebot ... ")
+    spotify.main()
 
     app = Application.builder().token(TOKEN).build()
 
     # Commands
-    app.add_handler(CommandHandler('start', start_command))
-    app.add_handler(CommandHandler('help', help_command))
-    app.add_handler(CommandHandler('custom', custom_command))
+    app.add_handler(CommandHandler('start', commands.start_command))
+    app.add_handler(CommandHandler('help', commands.help_command))
+    app.add_handler(CommandHandler('spotifyHelp', commands.spotifyHelp_command))
+    app.add_handler(CommandHandler('addSong', commands.addSong_command))
 
     # Messages
     app.add_handler(MessageHandler(filters.TEXT, handle_message))
